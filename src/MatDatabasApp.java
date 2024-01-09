@@ -1,11 +1,9 @@
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
+
 
 public class MatDatabasApp {
     public static void macroTrack() {
-        //Scanner scanner = new Scanner(System.in);
-
         // Vi skapar en matdatabas
         MatDatabas matDatabas = new MatDatabas();
         matDatabas.addFood("Kyckling (grillad)", 165);
@@ -51,7 +49,6 @@ public class MatDatabasApp {
         System.out.println("Calories: " + calories);
 
         Main.scanner.nextLine();
-        //scanner.close();
     }
 
     static class MatDatabas {
