@@ -1,11 +1,10 @@
-import java.util.Scanner;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class BMI {
-    private static final Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) {
+
+    public static void BMIcalc() {
         double weight = getValidNumericInput("Hur mycket väger du?: ");
         double heightInCentimeters = getValidNumericInput("Hur lång är du?(i cm): ");
 
@@ -44,8 +43,6 @@ public class BMI {
             System.out.println("För att gå ner " + kilogramsToLose + " kilo med ett underskott på "
                     + intendedCaloricDeficitPerDay + " kalorier, kan du nå ditt mål om " + daysToReachGoal + " dagar, datum: " + dateToReachGoal);
         }
-
-        scanner.close();
     }
 
     static class BMICalculator {
@@ -59,7 +56,7 @@ public class BMI {
         boolean validInput = false;
         while (!validInput) {
             System.out.print("Ange ditt kön(M/K): ");
-            String input = scanner.next().toUpperCase();
+            String input = Main.scanner.next().toUpperCase();
             if (input.equals("M") || input.equals("K")) {
                 gender = input.charAt(0);
                 validInput = true;
@@ -76,14 +73,14 @@ public class BMI {
         while (!validInput) {
             try {
                 System.out.print(message);
-                value = Integer.parseInt(scanner.next());
+                value = Integer.parseInt(Main.scanner.next());
                 validInput = true;
             } catch (NumberFormatException e) {
                 System.out.println("Ogiltigt val, vänligen välj en giltig siffra.");
             }
         }
 
-        scanner.nextLine();
+        Main.scanner.nextLine();
 
         return value;
     }
@@ -94,7 +91,7 @@ public class BMI {
         while (!validInput) {
             try {
                 System.out.print(message);
-                value = Double.parseDouble(scanner.next());
+                value = Double.parseDouble(Main.scanner.next());
                 validInput = true;
             } catch (NumberFormatException e) {
                 System.out.println("Ogiltigt val, vänligen välj en giltig siffra.");
@@ -108,13 +105,13 @@ public class BMI {
         boolean validInput = false;
         while (!validInput) {
             System.out.print("Vad är ditt mål med din vikt? (Behålla/Öka/Minska): ");
-            goal = scanner.next();
+            goal = Main.scanner.next();
             if (goal.equalsIgnoreCase("behålla") || goal.equalsIgnoreCase("öka") || goal.equalsIgnoreCase("minska")) {
                 validInput = true;
             } else {
                 System.out.println("Ogiltigt val, vänligen välj bland tillgängliga val.");
             }
-            scanner.nextLine();
+            Main.scanner.nextLine();
         }
         return goal;
     }
@@ -124,7 +121,7 @@ public class BMI {
         boolean validInput = false;
         do {
             System.out.print("Vad är din aktivitetsnivå? (stillasittande/lätt/måttlig/tung): ");
-            activityLevel = scanner.next().toLowerCase().replace(" ", "");
+            activityLevel = Main.scanner.next().toLowerCase().replace(" ", "");
             if (activityLevel.equals("stillasittande") || activityLevel.equals("lätt") || activityLevel.equals("måttlig") || activityLevel.equals("tung")) {
                 validInput = true;
             } else {

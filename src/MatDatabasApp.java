@@ -3,8 +3,8 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class MatDatabasApp {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    public static void macroTrack() {
+        //Scanner scanner = new Scanner(System.in);
 
         // Vi skapar en matdatabas
         MatDatabas matDatabas = new MatDatabas();
@@ -38,11 +38,11 @@ public class MatDatabasApp {
         System.out.println("Matlistan:");
         matDatabas.displayFoodList();
         System.out.print("Välj en produkt: ");
-        String selectedFood = scanner.nextLine().toLowerCase(); // Convert to lowercase
+        String selectedFood = Main.scanner.nextLine().toLowerCase(); // Convert to lowercase
 
         // Vi låter användaren ange vikt i gram
         System.out.print("Hur många gram åt du?: ");
-        double amountInGrams = scanner.nextDouble();
+        double amountInGrams = Main.scanner.nextDouble();
 
         // Utifrån användarens val i selectedFoods skickar vi värdet till calculateCalories metoden.
         //Användares val i gram finns i amountInGrams, värde skickas till calculateCalories metoden.
@@ -50,7 +50,8 @@ public class MatDatabasApp {
         double calories = matDatabas.calculateCalories(selectedFood, amountInGrams);
         System.out.println("Calories: " + calories);
 
-        scanner.close();
+        Main.scanner.nextLine();
+        //scanner.close();
     }
 
     static class MatDatabas {
