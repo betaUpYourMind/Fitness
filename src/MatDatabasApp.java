@@ -1,11 +1,9 @@
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
+
 
 public class MatDatabasApp {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
+    public static void macroTrack() {
         // Vi skapar en matdatabas
         MatDatabas matDatabas = new MatDatabas();
         matDatabas.addFood("Kyckling (grillad)", 165);
@@ -37,16 +35,18 @@ public class MatDatabasApp {
         //Spara totala kalorier här
         double totalCalories = 0.0;
         //  Vi låter användaren välja mat
+
         while (true) {
             System.out.println("Lägga till mat?(Ja/Nej)");
-            String läggatill = scanner.nextLine().toLowerCase();
+            String läggatill = Main.scanner.nextLine().toLowerCase();
             if (läggatill.equals("nej"))
                 break;
 
             System.out.println("Matlistan:");
             matDatabas.displayFoodList();
             System.out.print("Välj en produkt: ");
-            String selectedFood = scanner.nextLine().toLowerCase(); // Convert to lowercase
+            String selectedFood = Main.scanner.nextLine().toLowerCase(); // Convert to lowercase
+
 
             // Vi låter användaren ange vikt i gram
             System.out.print("Hur många gram åt du?: ");
@@ -64,7 +64,8 @@ public class MatDatabasApp {
         }
         System.out.println("Totala kalorier: " + totalCalories);
 
-        scanner.close();
+
+        Main.scanner.nextLine();
 
     }
 
