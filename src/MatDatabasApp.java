@@ -34,23 +34,38 @@ public class MatDatabasApp {
         matDatabas.addFood("Quinoa (kokt)", 120);
         matDatabas.addFood("Cashewnötter (rostade)", 553);
 
+        //Spara totala kalorier här
+        double totalCalories = 0.0;
         //  Vi låter användaren välja mat
-        System.out.println("Matlistan:");
-        matDatabas.displayFoodList();
-        System.out.print("Välj en produkt: ");
-        String selectedFood = scanner.nextLine().toLowerCase(); // Convert to lowercase
+        while (true) {
+            System.out.println("Lägga till mat?(Ja/Nej)");
+            String läggatill = scanner.nextLine().toLowerCase();
+            if (läggatill.equals("nej"))
+                break;
 
-        // Vi låter användaren ange vikt i gram
-        System.out.print("Hur många gram åt du?: ");
-        double amountInGrams = scanner.nextDouble();
+            System.out.println("Matlistan:");
+            matDatabas.displayFoodList();
+            System.out.print("Välj en produkt: ");
+            String selectedFood = scanner.nextLine().toLowerCase(); // Convert to lowercase
 
-        // Utifrån användarens val i selectedFoods skickar vi värdet till calculateCalories metoden.
-        //Användares val i gram finns i amountInGrams, värde skickas till calculateCalories metoden.
-        //Detta ges till variabeln calories som sedan presenteras
-        double calories = matDatabas.calculateCalories(selectedFood, amountInGrams);
-        System.out.println("Calories: " + calories);
+            // Vi låter användaren ange vikt i gram
+            System.out.print("Hur många gram åt du?: ");
+            double amountInGrams = scanner.nextDouble();
+
+            scanner.nextLine();
+
+            // Utifrån användarens val i selectedFoods skickar vi värdet till calculateCalories metoden.
+            //Användares val i gram finns i amountInGrams, värde skickas till calculateCalories metoden.
+            //Detta ges till variabeln calories som sedan presenteras
+            double calories = matDatabas.calculateCalories(selectedFood, amountInGrams);
+            System.out.println("Calories: " + calories);
+
+            totalCalories += calories;
+        }
+        System.out.println("Totala kalorier: " + totalCalories);
 
         scanner.close();
+
     }
 
     static class MatDatabas {
