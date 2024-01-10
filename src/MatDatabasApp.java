@@ -50,9 +50,9 @@ public class MatDatabasApp {
 
             // Vi låter användaren ange vikt i gram
             System.out.print("Hur många gram åt du?: ");
-            double amountInGrams = scanner.nextDouble();
+            double amountInGrams = Main.scanner.nextDouble();
 
-            scanner.nextLine();
+            Main.scanner.nextLine();
 
             // Utifrån användarens val i selectedFoods skickar vi värdet till calculateCalories metoden.
             //Användares val i gram finns i amountInGrams, värde skickas till calculateCalories metoden.
