@@ -8,12 +8,11 @@ public class Main {
     public static void main(String[] args) {
         String choice;
         while (true){
-
-
-            System.out.println("Välkommen! Ange 1 eller 2 för att använda appens funktioner: ");
-            System.out.println("1. BMI Calculator");
-            System.out.println("2. Macro tracker");
-            System.out.println("3. Avsluta programmet");
+            System.out.print("*** VÄLKOMMEN TILL FITNESSAPP ***\n");
+            System.out.print("1. BMI Calculator\n");
+            System.out.print("2. Macro tracker\n");
+            System.out.print("3. Avsluta programmet\n");
+            System.out.print("Ange 1 eller 2 för att använda appens funktioner: ");
 
             choice = scanner.nextLine();
 

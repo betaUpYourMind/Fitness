@@ -5,30 +5,30 @@ public class BMI {
 
 
     public static void BMIcalc() {
-        double weight = getValidNumericInput("Hur mycket väger du?: ");
-        double heightInCentimeters = getValidNumericInput("Hur lång är du?(i cm): ");
+        double weight = getValidNumericInput("Hur mycket väger du (i kg)?: ");
+        double heightInCentimeters = getValidNumericInput("Hur lång är du (i cm)?: ");
 
         double heightInMeters = heightInCentimeters / 100.0;
 
         int bmi = (int) BMICalculator.calculateBMI(weight, heightInMeters);
-        System.out.println("Din BMI är: " + bmi);
+        System.out.println('\n' + "BMI: " + bmi);
 
         char gender = getValidGenderInput();
         int age = getValidIntegerInput("Ange din ålder: ");
 
-        String activityLevel = getValidActivityLevelInput();
+        int activityLevel = getValidActivityLevelInput();
 
         int suggestedCaloricIntake = suggestCaloricIntake(gender, age, weight, heightInMeters, activityLevel);
-        System.out.println("Baserat på din basalmetabolism, aktivitetsnivå och ålder är den rekommenderade kaloriintaget/dag: " + suggestedCaloricIntake + "kal");
+        System.out.println('\n' + "Baserat på din basalmetabolism, aktivitetsnivå och ålder är den rekommenderade kaloriintaget/dag: " + suggestedCaloricIntake + "kal" + '\n');
 
-        String goal = getValidGoalInput();
+        int goal = getValidGoalInput();
 
-        if (goal.equalsIgnoreCase("Behålla")) {
+        if (goal == 1) { //Behålla intag
             System.out.println("Ditt dagliga intag för att behålla din vikt är: " + suggestedCaloricIntake);
-        } else if (goal.equalsIgnoreCase("Öka")) {
+        } else if (goal == 2) { //Öka intag
             int caloriesForGain = suggestedCaloricIntake + 300;
             System.out.println("Ditt dagliga kaloriintag för att öka i vikt: " + caloriesForGain);
-        } else if (goal.equalsIgnoreCase("Minska")) {
+        } else if (goal == 3) { //Minska intag
             double intendedCaloricDeficitPerDay = getValidNumericInput("Ange hur stor kaloriunderskott du vill ha (i kalorier): ");
             double kilogramsToLose = getValidNumericInput("Ange hur många kilo du vill gå ner: ");
 
@@ -55,7 +55,7 @@ public class BMI {
         char gender = ' ';
         boolean validInput = false;
         while (!validInput) {
-            System.out.print("Ange ditt kön(M/K): ");
+            System.out.print('\n' + "M  = Man" +'\n' + "K = Kvinna" + '\n' + "Ange ditt kön (M/K)/ : ");
             String input = Main.scanner.next().toUpperCase();
             if (input.equals("M") || input.equals("K")) {
                 gender = input.charAt(0);
@@ -100,29 +100,28 @@ public class BMI {
         return value;
     }
 
-    static String getValidGoalInput() {
-        String goal = "";
+    static int getValidGoalInput() {
+        int goal = 0;
         boolean validInput = false;
         while (!validInput) {
-            System.out.print("Vad är ditt mål med din vikt? (Behålla/Öka/Minska): ");
-            goal = Main.scanner.next();
-            if (goal.equalsIgnoreCase("behålla") || goal.equalsIgnoreCase("öka") || goal.equalsIgnoreCase("minska")) {
+            System.out.print("1. Behålla" + '\n' + "2. Öka" + '\n' + "3. Minska" + '\n' + "Vad är ditt mål med din vikt? ");
+            goal = getValidIntegerInput("");
+            if (goal == 1 || goal == 2 || goal == 3) {
                 validInput = true;
             } else {
                 System.out.println("Ogiltigt val, vänligen välj bland tillgängliga val.");
             }
-            Main.scanner.nextLine();
         }
         return goal;
     }
 
-    static String getValidActivityLevelInput() {
-        String activityLevel;
+    static int getValidActivityLevelInput() {
+        int activityLevel;
         boolean validInput = false;
         do {
-            System.out.print("Vad är din aktivitetsnivå? (stillasittande/lätt/måttlig/tung): ");
-            activityLevel = Main.scanner.next().toLowerCase().replace(" ", "");
-            if (activityLevel.equals("stillasittande") || activityLevel.equals("lätt") || activityLevel.equals("måttlig") || activityLevel.equals("tung")) {
+            System.out.print('\n' + "1. Stillasittande" + '\n' + "2. Lätt" + '\n' + "3. Måttlig" + '\n' + "4. Tung" + '\n' + "Vad är din aktivitetsnivå? ");
+            activityLevel = getValidIntegerInput("");
+            if (activityLevel == 1 || activityLevel == 2 || activityLevel == 3 || activityLevel == 4) {
                 validInput = true;
             } else {
                 System.out.println("Ogiltigt val, vänligen välj bland tillgängliga val:");
@@ -131,36 +130,36 @@ public class BMI {
         return activityLevel;
     }
 
-    static int suggestCaloricIntake(char gender, int age, double weight, double height, String activityLevel) {
+    static int suggestCaloricIntake(char gender, int age, double weight, double height, int activityLevel) {
         int suggestedCaloricIntake;
-        double bmr;
+        double bmr; //Basal Metabolic Rate, antal kalorier/dag som kroppen behöver.
         if (gender == 'M') {
             bmr = 88.362 + (13.397 * weight) + (4.799 * height * 100) - (5.677 * age);
         } else {
             bmr = 447.593 + (9.247 * weight) + (3.098 * height * 100) - (4.330 * age);
         }
 
-        double tdee;
+        double tdee; //Total Daily Energy Expenditure, antal kalorier per dag som kroppen förbrukar.
 
         switch (activityLevel) {
-            case "stillasittande":
+            case 1: //stillasittande
                 tdee = bmr * 1.2;
                 break;
-            case "lätt":
+            case 2: //lätt
                 tdee = bmr * 1.375;
                 break;
-            case "måttlig":
+            case 3: //måttlig
                 tdee = bmr * 1.55;
                 break;
-            case "tung":
+            case 4: //tung
                 tdee = bmr * 1.725;
                 break;
-            default:
+            default: //Ogiltig inmatning som exempelvis negativa tal eller strängar
                 tdee = bmr;
                 System.out.println("Ogiltig aktivitetsnivå. Utgår ifrån stillasittande.");
                 break;
         }
-
+        // Det rekommenderade kaloriintaget kommer aldrig understiga 1400 kalorier dagligen.
         suggestedCaloricIntake = Math.max((int) tdee, 1400);
         return suggestedCaloricIntake;
     }
